@@ -14,7 +14,7 @@ class DeepLinkUtils(val analytics: Analytics) {
         if (intent == null || intent.data == null) {
             return
         }
-
+        analytics.updateReferrer(intent.data.toString())
         val properties = extractLinkProperties(referrer, intent.data)
         analytics.track("Deep Link Opened", properties)
     }
