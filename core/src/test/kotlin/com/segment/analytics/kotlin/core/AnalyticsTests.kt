@@ -473,8 +473,7 @@ class AnalyticsTests {
                         userId = "oldUserId",
                         traits = buildJsonObject { put("behaviour", "bad") },
                         anonymousId = "qwerty-qwerty-123",
-                        referrer = "oldReferrer"
-                    ), curUserInfo
+                        referrer = null), curUserInfo
                 )
 
                 analytics.identify("newUserId", buildJsonObject { put("behaviour", "good") })
@@ -485,7 +484,7 @@ class AnalyticsTests {
                         userId = "newUserId",
                         traits = buildJsonObject { put("behaviour", "good") },
                         anonymousId = "qwerty-qwerty-123",
-                        referrer = "newReferrer"
+                        referrer = null
                     ), newUserInfo
                 )
             }
@@ -504,7 +503,7 @@ class AnalyticsTests {
                         userId = "oldUserId",
                         traits = buildJsonObject { put("behaviour", "bad") },
                         anonymousId = "qwerty-qwerty-123",
-                        referrer = "oldReferrer"
+                        referrer = null
                     ), curUserInfo
                 )
 
@@ -516,7 +515,7 @@ class AnalyticsTests {
                         userId = "oldUserId",
                         traits = buildJsonObject { put("behaviour", "good") },
                         anonymousId = "qwerty-qwerty-123",
-                        referrer = "oldReferrer"
+                        referrer = null
                     ), newUserInfo
                 )
             }
@@ -892,6 +891,25 @@ class AnalyticsTests {
         @Test
         fun `anonymousId fetches current Analytics anonymousId`() = runTest {
             assertEquals("qwerty-qwerty-123", analytics.anonymousIdAsync())
+        }
+    }
+
+    @Nested
+    inner class Referrer {
+        @Test
+        fun `updateReferrer non-null update`() = runTest {
+            analytics.updateReferrer("https://example.com")
+            val newUserInfo = analytics.store.currentState(UserInfo::class)
+            assertEquals(analytics.userInfo.referrer, "https://example.com")
+            assertEquals(newUserInfo?.referrer, "https://example.com")
+        }
+
+        @Test
+        fun `updateReferrer null update`() = runTest {
+            analytics.updateReferrer(null)
+            val newUserInfo = analytics.store.currentState(UserInfo::class)
+            assertEquals(analytics.userInfo.referrer, null)
+            assertEquals(newUserInfo?.referrer, null)
         }
     }
 
