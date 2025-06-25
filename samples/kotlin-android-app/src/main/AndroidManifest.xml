@@ -44,7 +44,6 @@
                 adb shell am start -a android.intent.action.VIEW -c android.intent.category.DEFAULT -d "seg://segment-sample.com"
                 -->
                 <data
-                    android:host="segment-sample.com"
                     android:scheme="seg" />
             </intent-filter>
         </activity>

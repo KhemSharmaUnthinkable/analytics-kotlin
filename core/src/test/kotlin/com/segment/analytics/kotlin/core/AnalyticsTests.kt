@@ -472,7 +472,8 @@ class AnalyticsTests {
                     UserInfo(
                         userId = "oldUserId",
                         traits = buildJsonObject { put("behaviour", "bad") },
-                        anonymousId = "qwerty-qwerty-123"
+                        anonymousId = "qwerty-qwerty-123",
+                        referrer = "oldReferrer"
                     ), curUserInfo
                 )
 
@@ -483,7 +484,8 @@ class AnalyticsTests {
                     UserInfo(
                         userId = "newUserId",
                         traits = buildJsonObject { put("behaviour", "good") },
-                        anonymousId = "qwerty-qwerty-123"
+                        anonymousId = "qwerty-qwerty-123",
+                        referrer = "newReferrer"
                     ), newUserInfo
                 )
             }
@@ -501,7 +503,8 @@ class AnalyticsTests {
                     UserInfo(
                         userId = "oldUserId",
                         traits = buildJsonObject { put("behaviour", "bad") },
-                        anonymousId = "qwerty-qwerty-123"
+                        anonymousId = "qwerty-qwerty-123",
+                        referrer = "oldReferrer"
                     ), curUserInfo
                 )
 
@@ -512,7 +515,8 @@ class AnalyticsTests {
                     UserInfo(
                         userId = "oldUserId",
                         traits = buildJsonObject { put("behaviour", "good") },
-                        anonymousId = "qwerty-qwerty-123"
+                        anonymousId = "qwerty-qwerty-123",
+                        referrer = "oldReferrer"
                     ), newUserInfo
                 )
             }
@@ -782,7 +786,8 @@ class AnalyticsTests {
                     UserInfo(
                         userId = "newId",
                         traits = emptyJsonObject,
-                        anonymousId = "qwerty-qwerty-123"
+                        anonymousId = "qwerty-qwerty-123",
+                        referrer = null
                     ), newUserInfo
                 )
             }
